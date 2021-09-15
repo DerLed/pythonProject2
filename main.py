@@ -2,11 +2,19 @@ from tkinter import *
 from functools import partial
 # import math
 import time
+from tkinter import scrolledtext
+from tkinter import filedialog
 
 
 def tick():
     tm.after(200, tick)
     tm['text'] = time.strftime('%H:%M:%S')
+
+
+def open_file():
+    file = filedialog.askopenfilename()
+    f = open(file, 'r')
+    text1.insert(1.0, f.read())
 
 
 def update(val):
@@ -67,6 +75,14 @@ for a in nums:
     if m_coll > 2:
         m_coll = 0
         m_row += 1
+
+text1 = scrolledtext.ScrolledText(window, height=7, width=7, wrap=WORD)
+text1.grid()
+# file = filedialog.askopenfilename()
+# f = open(file, 'r')
+# text1.insert(1.0, f.read())
+
+Button(text="Открыть", command=open_file).grid(column=1, row=5)
 
 
 window.mainloop()
